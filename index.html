@@ -7,96 +7,140 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
         }
         h2 {
-            text-align: center;
+            color: #4CAF50;
         }
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
+            margin: 20px 0;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         th, td {
             padding: 10px;
+            border: 1px solid #ddd;
             text-align: left;
         }
-        form {
-            width: 80%;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
+        th {
+            background-color: #f2f2f2;
         }
-        label, input, select {
-            margin: 10px 0;
+        form {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h2>Library Management System</h2>
-    
-    <div id="authors">
-        <h3>Authors</h3>
-        <div id="author-table"></div>
-        <form id="add-author" method="POST" action="add_author.php">
-            <h3>Add Author</h3>
-            <label for="first-name">First Name:</label>
-            <input type="text" id="first-name" name="first_name" required>
-            <label for="last-name">Last Name:</label>
-            <input type="text" id="last-name" name="last_name" required>
-            <button type="submit">Add Author</button>
-        </form>
-    </div>
-    
-    <div id="books">
-        <h3>Books</h3>
-        <div id="book-table"></div>
-        <form id="add-book" method="POST" action="add_book.php">
-            <h3>Add Book</h3>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-            <label for="genre">Genre:</label>
-            <input type="text" id="genre" name="genre" required>
-            <label for="author-id">Author ID:</label>
-            <input type="number" id="author-id" name="author_id" required>
-            <button type="submit">Add Book</button>
-        </form>
-    </div>
-    
-    <div id="borrowers">
-        <h3>Borrowers</h3>
-        <div id="borrower-table"></div>
-        <form id="add-borrower" method="POST" action="add_borrower.php">
-            <h3>Add Borrower</h3>
-            <label for="borrower-first-name">First Name:</label>
-            <input type="text" id="borrower-first-name" name="first_name" required>
-            <label for="borrower-last-name">Last Name:</label>
-            <input type="text" id="borrower-last-name" name="last_name" required>
-            <button type="submit">Add Borrower</button>
-        </form>
-    </div>
-    
-    <div id="borrowing-records">
-        <h3>Borrowing Records</h3>
-        <div id="borrowing-record-table"></div>
-        <form id="add-record" method="POST" action="add_record.php">
-            <h3>Add Borrowing Record</h3>
-            <label for="book-id">Book ID:</label>
-            <input type="number" id="book-id" name="book_id" required>
-            <label for="borrower-id">Borrower ID:</label>
-            <input type="number" id="borrower-id" name="borrower_id" required>
-            <label for="borrow-date">Borrow Date:</label>
-            <input type="date" id="borrow-date" name="borrow_date" required>
-            <label for="return-date">Return Date:</label>
-            <input type="date" id="return-date" name="return_date">
-            <button type="submit">Add Record</button>
-        </form>
-    </div>
-    
+    <header>
+        <h1>Library Management System</h1>
+    </header>
+    <main>
+        <section id="authors">
+            <h2>Authors</h2>
+            <div id="author-table"></div>
+            <form id="add-author" method="POST" action="add_author.php">
+                <h3>Add Author</h3>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first_name" required>
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last_name" required>
+                <button type="submit">Add Author</button>
+            </form>
+        </section>
+
+        <section id="books">
+            <h2>Books</h2>
+            <div id="book-table"></div>
+            <form id="add-book" method="POST" action="add_book.php">
+                <h3>Add Book</h3>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" required>
+                <label for="author-id">Author ID:</label>
+                <input type="number" id="author-id" name="author_id" required>
+                <button type="submit">Add Book</button>
+            </form>
+        </section>
+
+        <section id="borrowers">
+            <h2>Borrowers</h2>
+            <div id="borrower-table"></div>
+            <form id="add-borrower" method="POST" action="add_borrower.php">
+                <h3>Add Borrower</h3>
+                <label for="borrower-first-name">First Name:</label>
+                <input type="text" id="borrower-first-name" name="first_name" required>
+                <label for="borrower-last-name">Last Name:</label>
+                <input type="text" id="borrower-last-name" name="last_name" required>
+                <button type="submit">Add Borrower</button>
+            </form>
+        </section>
+
+        <section id="borrowing-records">
+            <h2>Borrowing Records</h2>
+            <div id="borrowing-record-table"></div>
+            <form id="add-record" method="POST" action="add_record.php">
+                <h3>Add Borrowing Record</h3>
+                <label for="book-id">Book ID:</label>
+                <input type="number" id="book-id" name="book_id" required>
+                <label for="borrower-id">Borrower ID:</label>
+                <input type="number" id="borrower-id" name="borrower_id" required>
+                <label for="borrow-date">Borrow Date:</label>
+                <input type="date" id="borrow-date" name="borrow_date" required>
+                <label for="return-date">Return Date:</label>
+                <input type="date" id="return-date" name="return_date">
+                <button type="submit">Add Record</button>
+            </form>
+        </section>
+    </main>
+
     <script>
-        // Fetch data and display tables
         fetch('fetch_data.php')
             .then(response => response.json())
             .then(data => {
