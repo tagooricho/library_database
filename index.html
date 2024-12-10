@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #f9f9f9;
             color: #333;
             margin: 0;
             padding: 0;
@@ -16,60 +16,50 @@
             background-color: #4CAF50;
             color: white;
             text-align: center;
-            padding: 1em 0;
+            padding: 1rem 0;
         }
         main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
-        h2 {
-            color: #4CAF50;
+        section {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
         }
         th, td {
-            padding: 10px;
+            padding: 0.5rem;
             border: 1px solid #ddd;
-            text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #f4f4f4;
         }
         form {
-            background-color: white;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 600px;
-            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
         label {
-            display: block;
-            margin: 10px 0 5px;
+            font-weight: bold;
         }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        input, button {
+            padding: 0.5rem;
+            font-size: 1rem;
         }
         button {
-            padding: 10px 15px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 3px;
             cursor: pointer;
-            font-size: 16px;
         }
         button:hover {
             background-color: #45a049;
@@ -81,74 +71,92 @@
         <h1>Library Management System</h1>
     </header>
     <main>
-        <section id="authors">
+        <!-- Authors Section -->
+        <section>
             <h2>Authors</h2>
-            <div id="author-table"></div>
-            <form id="add-author" method="POST" action="add_author.php">
+            <div id="authors-table"></div>
+            <form id="add-author-form">
                 <h3>Add Author</h3>
-                <label for="first-name">First Name:</label>
-                <input type="text" id="first-name" name="first_name" required>
-                <label for="last-name">Last Name:</label>
-                <input type="text" id="last-name" name="last_name" required>
+                <label for="author-first-name">First Name:</label>
+                <input type="text" id="author-first-name" name="first_name" required>
+                <label for="author-last-name">Last Name:</label>
+                <input type="text" id="author-last-name" name="last_name" required>
                 <button type="submit">Add Author</button>
             </form>
         </section>
-
-        <section id="books">
+        <!-- Books Section -->
+        <section>
             <h2>Books</h2>
-            <div id="book-table"></div>
-            <form id="add-book" method="POST" action="add_book.php">
+            <div id="books-table"></div>
+            <form id="add-book-form">
                 <h3>Add Book</h3>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
-                <label for="genre">Genre:</label>
-                <input type="text" id="genre" name="genre" required>
-                <label for="author-id">Author ID:</label>
-                <input type="number" id="author-id" name="author_id" required>
+                <label for="book-title">Title:</label>
+                <input type="text" id="book-title" name="title" required>
+                <label for="book-genre">Genre:</label>
+                <input type="text" id="book-genre" name="genre" required>
+                <label for="book-author-id">Author ID:</label>
+                <input type="number" id="book-author-id" name="author_id" required>
                 <button type="submit">Add Book</button>
             </form>
         </section>
-
-        <section id="borrowers">
-            <h2>Borrowers</h2>
-            <div id="borrower-table"></div>
-            <form id="add-borrower" method="POST" action="add_borrower.php">
-                <h3>Add Borrower</h3>
-                <label for="borrower-first-name">First Name:</label>
-                <input type="text" id="borrower-first-name" name="first_name" required>
-                <label for="borrower-last-name">Last Name:</label>
-                <input type="text" id="borrower-last-name" name="last_name" required>
-                <button type="submit">Add Borrower</button>
-            </form>
-        </section>
-
-        <section id="borrowing-records">
-            <h2>Borrowing Records</h2>
-            <div id="borrowing-record-table"></div>
-            <form id="add-record" method="POST" action="add_record.php">
-                <h3>Add Borrowing Record</h3>
-                <label for="book-id">Book ID:</label>
-                <input type="number" id="book-id" name="book_id" required>
-                <label for="borrower-id">Borrower ID:</label>
-                <input type="number" id="borrower-id" name="borrower_id" required>
-                <label for="borrow-date">Borrow Date:</label>
-                <input type="date" id="borrow-date" name="borrow_date" required>
-                <label for="return-date">Return Date:</label>
-                <input type="date" id="return-date" name="return_date">
-                <button type="submit">Add Record</button>
-            </form>
-        </section>
     </main>
-
     <script>
-        fetch('fetch_data.php')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('author-table').innerHTML = data.authors;
-                document.getElementById('book-table').innerHTML = data.books;
-                document.getElementById('borrower-table').innerHTML = data.borrowers;
-                document.getElementById('borrowing-record-table').innerHTML = data.borrowing_records;
+        // Function to fetch and display data
+        function fetchData() {
+            fetch('fetch_data.php')
+                .then(response => response.json())
+                .then(data => {
+                    displayTable('authors-table', data.authors, ['ID', 'First Name', 'Last Name']);
+                    displayTable('books-table', data.books, ['ID', 'Title', 'Genre', 'Author ID']);
+                });
+        }
+
+        // Function to display a table
+        function displayTable(elementId, data, headers) {
+            const container = document.getElementById(elementId);
+            if (!data.length) {
+                container.innerHTML = '<p>No data available.</p>';
+                return;
+            }
+            let tableHTML = '<table><thead><tr>';
+            headers.forEach(header => tableHTML += `<th>${header}</th>`);
+            tableHTML += '</tr></thead><tbody>';
+            data.forEach(row => {
+                tableHTML += '<tr>';
+                Object.values(row).forEach(value => tableHTML += `<td>${value}</td>`);
+                tableHTML += '</tr>';
             });
+            tableHTML += '</tbody></table>';
+            container.innerHTML = tableHTML;
+        }
+
+        // Event listeners for form submissions
+        document.getElementById('add-author-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('add_author.php', { method: 'POST', body: formData })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message);
+                    fetchData();
+                    this.reset();
+                });
+        });
+
+        document.getElementById('add-book-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            fetch('add_book.php', { method: 'POST', body: formData })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message);
+                    fetchData();
+                    this.reset();
+                });
+        });
+
+        // Initial data fetch
+        fetchData();
     </script>
 </body>
 </html>
