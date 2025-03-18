@@ -16,7 +16,7 @@ $author_id = $_POST['author_id'];
 
 $sql = "INSERT INTO Books (Title, Genre, AuthorID) VALUES ('$title', '$genre', '$author_id')";
 if ($conn->query($sql) === TRUE) {
-    echo "New book added successfully";
+    echo "New book added successfully.";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
